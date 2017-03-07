@@ -26,7 +26,7 @@ public class ExampleInstrumentedTest {
     */
 
     @Test
-    public void GivenTheSplashScreenIsLoaded() {
+    public void LoadSplashScreen() {
         //DisplayGoButton
 
         //GoButtonIsGreen
@@ -37,7 +37,7 @@ public class ExampleInstrumentedTest {
     }
 
     @Test
-    public void WhenTheGamePageIsDisplayed(){
+    public void LoadGameScreen(){
 
         //Display a 4 grid in the middle of the screen
 
