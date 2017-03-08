@@ -2,15 +2,27 @@ package demos.udemybraintrainer;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
+import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static org.junit.Assert.*;
 
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
+
+    @Rule
+    public ActivityTestRule<MainActivity> mActivityRule =
+            new ActivityTestRule<>(MainActivity.class);
+
+
     @Test
     public void useAppContext() throws Exception {
         // Context of the app under test.
@@ -20,18 +32,21 @@ public class ExampleInstrumentedTest {
     }
 
     /*
-    Tip: use tags to find out which button has been pressed
-            (Think about using a way to re-use formatting)
+        ** TIPS **
 
+        ** Tip: use tags to find out which button has been pressed
+        ** Think about using a way to re-use formatting
     */
 
     @Test
     public void LoadSplashScreen() {
-        //DisplayGoButton
+
+        onView(withId(R.id.btnStartGame)).perform(click());
 
         //GoButtonIsGreen
 
         //OnClickDisappears
+        onView(withId(R.id.btnStartGame)).check(doesNotExist());
 
         //OnClickShowMainMenu
     }
