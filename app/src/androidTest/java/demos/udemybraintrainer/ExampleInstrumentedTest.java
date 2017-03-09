@@ -5,6 +5,9 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
+import com.squareup.spoon.Spoon;
+
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,7 +16,7 @@ import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
@@ -22,6 +25,12 @@ public class ExampleInstrumentedTest {
     public ActivityTestRule<MainActivity> mActivityRule =
             new ActivityTestRule<>(MainActivity.class);
 
+    private MainActivity mActivity;
+
+    @Before
+    public void setUp() {
+        mActivity = mActivityRule.getActivity();
+    }
 
     @Test
     public void useAppContext() throws Exception {
@@ -29,6 +38,7 @@ public class ExampleInstrumentedTest {
         Context appContext = InstrumentationRegistry.getTargetContext();
 
         assertEquals("demos.udemybraintrainer", appContext.getPackageName());
+
     }
 
     /*
@@ -36,16 +46,28 @@ public class ExampleInstrumentedTest {
 
         ** Tip: use tags to find out which button has been pressed
         ** Think about using a way to re-use formatting
+        *
+        * ** use tools in xml instead of android for properties that should only display at design time.
     */
 
     @Test
     public void LoadSplashScreen() {
 
+
+
+        //Log.e("MATT", mActivity.getPackageName() );
+
+        Spoon.screenshot(mActivity, "On-first-load");
+
         onView(withId(R.id.btnStartGame)).perform(click());
 
         //GoButtonIsGreen
 
+        // Not capturing screenshots
+        //https://github.com/square/spoon/issues/283
+
         //OnClickDisappears
+        Spoon.screenshot(mActivity, "After-click-button-hidden");
         onView(withId(R.id.btnStartGame)).check(doesNotExist());
 
         //OnClickShowMainMenu
