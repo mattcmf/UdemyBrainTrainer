@@ -87,7 +87,7 @@ public class ExampleInstrumentedTest {
 
         Spoon.screenshot(mActivity, "On-first-load");
 
-        onView(withId(R.id.txtTimer)).check((matches(withText("00:05s"))));
+        onView(withId(R.id.txtTimer)).check((matches(withText("--:--"))));
 
         onView((withId(R.id.btnStartGame))).perform(click());
 

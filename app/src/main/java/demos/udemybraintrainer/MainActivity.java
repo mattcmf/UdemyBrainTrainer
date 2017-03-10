@@ -13,29 +13,28 @@ public class MainActivity extends AppCompatActivity {
 
     TextView timerDisplay;
 
-    public static String TimerDisplay(long milliSeconds){
-        String minsFormatted;
-        String secondsFormatted;
+    public static String timerDisplay(int milliseconds){
 
-        long mins =  milliSeconds / 60;
+        int seconds = milliseconds / 1000;
+        int secondsWithMins = seconds % 60;
+        int mins  = seconds /60;
+
+        String outputSeconds;
+        String outputMins;
+
         if (mins < 10){
-            minsFormatted = "0" + mins;
-        }
-        else
-        {
-            minsFormatted = String.valueOf(mins);
+            outputMins = "0" + mins;
+        } else {
+            outputMins = String.valueOf(mins);
         }
 
-        long seconds =  mins / 60;
-        if (seconds < 10){
-            secondsFormatted = "0" + seconds;
-        }
-        else
-        {
-            secondsFormatted = String.valueOf(seconds);
+        if (secondsWithMins < 10){
+            outputSeconds = "0" + secondsWithMins;
+        } else {
+            outputSeconds = String.valueOf(secondsWithMins);
         }
 
-        return minsFormatted + ":" + secondsFormatted;
+        return outputMins + ":" + outputSeconds+"s";
     }
 
     @Override
