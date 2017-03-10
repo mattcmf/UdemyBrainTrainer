@@ -2,8 +2,12 @@ package demos.udemybraintrainer;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
+import android.support.test.espresso.Espresso;
+import android.support.test.espresso.IdlingPolicies;
+import android.support.test.espresso.IdlingResource;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.text.format.DateUtils;
 
 import com.squareup.spoon.Spoon;
 
@@ -12,10 +16,15 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.concurrent.TimeUnit;
+
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(AndroidJUnit4.class)
@@ -53,24 +62,51 @@ public class ExampleInstrumentedTest {
     @Test
     public void LoadSplashScreen() {
 
-
-
-        //Log.e("MATT", mActivity.getPackageName() );
-
         Spoon.screenshot(mActivity, "On-first-load");
 
         onView(withId(R.id.btnStartGame)).perform(click());
 
         //GoButtonIsGreen
 
-        // Not capturing screenshots
-        //https://github.com/square/spoon/issues/283
-
         //OnClickDisappears
         Spoon.screenshot(mActivity, "After-click-button-hidden");
-        onView(withId(R.id.btnStartGame)).check(doesNotExist());
+
+        onView(withId(R.id.btnStartGame)).check((matches(not(isDisplayed()))));
+
 
         //OnClickShowMainMenu
+    }
+
+    @Test
+    public void Timer(){
+
+        long waitingTime = DateUtils.SECOND_IN_MILLIS * 5;
+
+        IdlingPolicies.setIdlingResourceTimeout(
+                waitingTime, TimeUnit.MILLISECONDS);
+
+        Spoon.screenshot(mActivity, "On-first-load");
+
+        onView(withId(R.id.txtTimer)).check((matches(withText("00:05s"))));
+
+        onView((withId(R.id.btnStartGame))).perform(click());
+
+        // Now we wait
+        IdlingResource idlingResource = new ElapsedTimeIdlingResource(waitingTime);
+        Espresso.registerIdlingResources(idlingResource);
+
+        onView(withId(R.id.txtTimer)).check((matches(withText("00:00s"))));
+
+        //Timer is displayed on the top left
+        //Given Go has been clicked
+        //      Then set Timer to 30
+        //Timer decrements at 1 second
+        //Timer can display 0
+        //Timer colour is yellow
+        //Timer is prefixed by s
+
+        // Clean up
+        Espresso.unregisterIdlingResources(idlingResource);
     }
 
     @Test
@@ -84,17 +120,6 @@ public class ExampleInstrumentedTest {
         //BottomRight is green
 
         //All Squares have no values
-    }
-
-    @Test
-    public void Timer(){
-        //Timer is displayed on the top left
-        //Given Go has been clicked
-        //      Then set Timer to 30
-        //Timer decrements at 1 second
-        //Timer can display 0
-        //Timer colour is yellow
-        //Timer is prefixed by s
     }
 
     @Test
