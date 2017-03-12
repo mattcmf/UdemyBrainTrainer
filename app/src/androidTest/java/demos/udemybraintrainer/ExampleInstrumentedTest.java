@@ -97,14 +97,6 @@ public class ExampleInstrumentedTest {
 
         onView(withId(R.id.txtTimer)).check((matches(withText("00:00s"))));
 
-        //Timer is displayed on the top left
-        //Given Go has been clicked
-        //      Then set Timer to 30
-        //Timer decrements at 1 second
-        //Timer can display 0
-        //Timer colour is yellow
-        //Timer is prefixed by s
-
         // Clean up
         Espresso.unregisterIdlingResources(idlingResource);
     }
@@ -133,8 +125,13 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void ScoreDisplay() {
+
         //Box colour?
         //Alignment is top Right
+        onView(withId(R.id.txtScore)).check((matches(withText("00"))));
+
+
+        Spoon.screenshot(mActivity, "On-first-load-score-display");
     }
 
     @Test
@@ -174,8 +171,8 @@ public class ExampleInstrumentedTest {
     public void PlayAgainButton(){
         //Given the timer is at 0
         // When the play again button has been clicked
-        //Then Reset score
-        //And Reset question
+        //Then reset score
+        //And reset question
         //And reset GameMessage output
         //And alignment is bottom middle below game message
     }
