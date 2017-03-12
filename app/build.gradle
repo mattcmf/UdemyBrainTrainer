@@ -38,7 +38,7 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile "org.mockito:mockito-core:1.10.19"
+    androidTestCompile "org.mockito:mockito-core:1.10.19"
 
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
@@ -68,6 +68,8 @@ dependencies {
     compile 'com.android.support.test.espresso:espresso-idling-resource:2.2.2'
 
     androidTestCompile 'com.squareup.spoon:spoon-client:1.7.1'
+    compile 'javax.inject:javax.inject:1'
+    compile 'com.android.support.test.espresso:espresso-core:2.2.2'
 }
 
 
@@ -75,3 +77,5 @@ spoon {
     debug = true;
     adbTimeout = 30;
 }
+
+apply plugin: 'com.google.gms.google-services'

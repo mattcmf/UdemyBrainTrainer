@@ -1,6 +1,8 @@
 package demos.udemybraintrainer;
 
 import android.content.Context;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.Espresso;
 import android.support.test.espresso.IdlingPolicies;
@@ -15,8 +17,11 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 
 import java.util.concurrent.TimeUnit;
+
+import javax.inject.Inject;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -27,8 +32,11 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.assertEquals;
 
+@RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
+    @Inject
+    AnswerGeneratorSingleton answerGeneratorSingleton;
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityRule =
@@ -106,21 +114,35 @@ public class ExampleInstrumentedTest {
 
         //Display a 4 grid in the middle of the screen
 
-        //TopLeft is pink
-        //TopRight is blue
-        //BottomLeft is red
-        //BottomRight is green
+        //TopLeft is blue/ purple
+        //TopRight is green
+        //BottomLeft is pink
+        //BottomRight is baby blue
 
         //All Squares have no values
     }
 
+
     @Test
     public void QuestionBox(){
-        //Given Go has been clicked
-        // Two numbers between 1 and 40 displayed
-        // Format is "X + Y"
         //Background is transparent
         //Alignment is top center
+
+
+
+//        Mockuito
+////        int correctAnswer;
+        Mockito.when(answerGeneratorSingleton.generateAnswersForQuestion(5, 7))thenReturn(new int[]{10,13,43,12})
+
+        AnswerGeneratorSingleton answerGeneratorSingletonSingleton = new AnswerGeneratorSingleton();
+
+        mActivityRule.getActivity().getApplication();
+
+        answerGeneratorSingletonSingleton.generateAnswersForQuestion(5, 7);
+
+        onView(withId(R.id.btnStartGame)).perform(click());
+
+        onView(withId(R.id.txtCurrentQuestion)).check((matches(withText("5 + 7"))));
     }
 
     @Test

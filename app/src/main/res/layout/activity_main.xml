@@ -34,6 +34,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="0.11"
                 android:background="#ffff00"
+                tools:visibility="invisible"
                 android:textAlignment="center"/>
 
             <TextView

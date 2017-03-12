@@ -15,21 +15,37 @@ public class AnswerGeneratorUnitTests {
     @Test
     public void whenIGenerateAQuestionWithInputs5and5_ThenAnswerIs10() {
         int correctAnswer;
-        AnswerGenerator answerGenerator = new AnswerGenerator();
+        AnswerGeneratorSingleton answerGeneratorSingleton = new AnswerGeneratorSingleton();
 
-        answerGenerator.generateAnswersForQuestion(5, 7);
-        correctAnswer =  answerGenerator.getCorrectAnswer();
+        answerGeneratorSingleton.generateAnswersForQuestion(5, 7);
+        correctAnswer =  answerGeneratorSingleton.getCorrectAnswer();
 
         assertEquals(12, correctAnswer);
     }
 
     @Test
+    public void whenIGenerateTwoQuestion_ThenTheAppDoesNotCarryOverData() {
+        int correctAnswer;
+        AnswerGeneratorSingleton answerGeneratorSingleton = new AnswerGeneratorSingleton();
+
+        answerGeneratorSingleton.generateAnswersForQuestion(5, 7);
+        correctAnswer =  answerGeneratorSingleton.getCorrectAnswer();
+
+        assertEquals(12, correctAnswer);
+
+        answerGeneratorSingleton.generateAnswersForQuestion(10, 5);
+        correctAnswer =  answerGeneratorSingleton.getCorrectAnswer();
+
+        assertEquals(15, correctAnswer);
+    }
+
+    @Test
     public void whenIGenerateAQuestion_Then4AnswersAreGenerated() {
         int[] answers;
-        AnswerGenerator answerGenerator = new AnswerGenerator();
+        AnswerGeneratorSingleton answerGeneratorSingleton = new AnswerGeneratorSingleton();
 
-        answerGenerator.generateAnswersForQuestion(2, 12);
-        answers =  answerGenerator.getAnswers();
+        answerGeneratorSingleton.generateAnswersForQuestion(2, 12);
+        answers =  answerGeneratorSingleton.getAnswers();
 
         assertEquals(4, answers.length);
     }
@@ -37,10 +53,10 @@ public class AnswerGeneratorUnitTests {
     @Test
     public void whenIGenerateAQuestion_Then4UniqueAnswersAreGenerated() {
         int[] answers;
-        AnswerGenerator answerGenerator = new AnswerGenerator();
+        AnswerGeneratorSingleton answerGeneratorSingleton = new AnswerGeneratorSingleton();
 
-        answerGenerator.generateAnswersForQuestion(2, 4);
-        answers = answerGenerator.getAnswers();
+        answerGeneratorSingleton.generateAnswersForQuestion(2, 4);
+        answers = answerGeneratorSingleton.getAnswers();
 
         boolean duplicates = false;
         int j, k;
