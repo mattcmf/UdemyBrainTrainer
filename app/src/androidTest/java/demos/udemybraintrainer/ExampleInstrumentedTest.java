@@ -17,7 +17,6 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 
 import java.util.concurrent.TimeUnit;
 
@@ -132,7 +131,7 @@ public class ExampleInstrumentedTest {
 
 //        Mockuito
 ////        int correctAnswer;
-        Mockito.when(answerGeneratorSingleton.generateAnswersForQuestion(5, 7))thenReturn(new int[]{10,13,43,12})
+        //Mockito.when(answerGeneratorSingleton.generateAnswersForQuestion(5, 7))thenReturn(new int[]{10,13,43,12})
 
         AnswerGeneratorSingleton answerGeneratorSingletonSingleton = new AnswerGeneratorSingleton();
 

@@ -21,7 +21,6 @@ public class Utilities {
         return ret;
     }
 
-
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     static void shuffleArray(int[] ar) {
         Random rnd = new Random();
