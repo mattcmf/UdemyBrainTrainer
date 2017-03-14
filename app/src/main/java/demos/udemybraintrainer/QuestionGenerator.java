@@ -6,7 +6,7 @@ public class QuestionGenerator extends AppCompatActivity {
 
     private int[] currentQuestion;
     private final int minQuestionRange = 1;
-    private final int maxQuestionRange = 1;
+    private final int maxQuestionRange = 30;
 
     public void generateQuestion() {
         int[] question = new int[]{

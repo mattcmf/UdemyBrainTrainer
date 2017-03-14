@@ -1,7 +1,5 @@
 package demos.udemybraintrainer;
 
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -17,7 +15,6 @@ public class AnswerGenerator extends AppCompatActivity {
     private int maxAnswerRange;
     private int minAnswerRange;
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void generateAnswersForQuestion(int questionFirstPart, int questionSecondPart) {
         setMinAnswerRange(questionFirstPart, questionSecondPart);
         setMaxAnswerRange(questionFirstPart, questionSecondPart);
@@ -39,7 +36,6 @@ public class AnswerGenerator extends AppCompatActivity {
         return convertIntegers(paddedList);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void setAnswersOptions() {
         int[] shuffledAnswers = padWithInvalidAnswers(getCorrectAnswer());
         shuffleArray(shuffledAnswers);

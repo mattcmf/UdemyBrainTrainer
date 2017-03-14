@@ -1,8 +1,5 @@
 package demos.udemybraintrainer;
 
-import android.os.Build;
-import android.support.annotation.RequiresApi;
-
 import java.util.List;
 import java.util.Random;
 
@@ -21,8 +18,6 @@ public class Utilities {
         return ret;
     }
 
-
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     static void shuffleArray(int[] ar) {
         Random rnd = new Random();
         for (int i = ar.length - 1; i > 0; i--) {
