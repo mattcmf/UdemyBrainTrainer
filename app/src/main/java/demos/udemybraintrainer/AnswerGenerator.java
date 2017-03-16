@@ -1,14 +1,12 @@
 package demos.udemybraintrainer;
 
-import android.support.v7.app.AppCompatActivity;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import static demos.udemybraintrainer.Utilities.convertIntegers;
 import static demos.udemybraintrainer.Utilities.shuffleArray;
 
-public class AnswerGenerator extends AppCompatActivity {
+public class AnswerGenerator {
 
     private int[] answers;
     private int correctAnswer;

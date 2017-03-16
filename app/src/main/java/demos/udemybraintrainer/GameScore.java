@@ -1,8 +1,6 @@
 package demos.udemybraintrainer;
 
-import android.support.v7.app.AppCompatActivity;
-
-public class GameScore extends AppCompatActivity {
+public class GameScore {
 
     private static int score;
 

@@ -15,6 +15,8 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 
 import java.util.concurrent.TimeUnit;
 
@@ -30,6 +32,9 @@ import static org.junit.Assert.assertEquals;
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
 
+    @Mock
+    QuestionGenerator mockQuestionGenerator;
+
     @Rule
     public ActivityTestRule<MainActivity> mActivityRule =
             new ActivityTestRule<>(MainActivity.class);
@@ -39,6 +44,7 @@ public class ExampleInstrumentedTest {
     @Before
     public void setUp() {
         mActivity = mActivityRule.getActivity();
+        mockQuestionGenerator = Mockito.mock(QuestionGenerator.class);
     }
 
     @Test
@@ -128,10 +134,16 @@ public class ExampleInstrumentedTest {
 
         //Box colour?
         //Alignment is top Right
-        onView(withId(R.id.txtScore)).check((matches(withText("00"))));
+        onView(withId(R.id.txtScore)).check((matches(withText("0/0"))));
 
+        //Mockito.when(ag.getMinAnswerRange()).thenReturn(1);
+        //Mockito.when(ag.getMaxAnswerRange()).thenReturn(1);
 
-        Spoon.screenshot(mActivity, "On-first-load-score-display");
+        Mockito.when(mockQuestionGenerator.MockQuestion()).thenReturn("1 + 1");
+
+        onView((withId(R.id.btnStartGame))).perform(click());
+
+        onView(withId(R.id.txtScore)).check((matches(withText("1 + 1"))));
     }
 
     @Test

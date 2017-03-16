@@ -1,8 +1,6 @@
 package demos.udemybraintrainer;
 
-import android.support.v7.app.AppCompatActivity;
-
-public class TimerActions extends AppCompatActivity {
+public class TimerActions {
 
     public static String setTimerFormat(long milliseconds) {
 

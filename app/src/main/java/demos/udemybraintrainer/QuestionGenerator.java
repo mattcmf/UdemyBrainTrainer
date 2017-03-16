@@ -1,17 +1,13 @@
 package demos.udemybraintrainer;
 
-import android.support.v7.app.AppCompatActivity;
-
-public class QuestionGenerator extends AppCompatActivity {
+public class QuestionGenerator {
 
     private int[] currentQuestion;
-    private final int minQuestionRange = 1;
-    private final int maxQuestionRange = 30;
 
     public void generateQuestion() {
         int[] question = new int[]{
-                RandomNumberGenerator.generate(minQuestionRange,maxQuestionRange),
-                RandomNumberGenerator.generate(minQuestionRange,maxQuestionRange)};
+                RandomNumberGenerator.generate(getMinQuestionRange(),getMaxQuestionRange()),
+                RandomNumberGenerator.generate(getMinQuestionRange(),getMaxQuestionRange())};
         setCurrentQuestion(question);
     }
 
@@ -22,4 +18,17 @@ public class QuestionGenerator extends AppCompatActivity {
     public void setCurrentQuestion(int[] currentQuestion) {
         this.currentQuestion = currentQuestion;
     }
+
+    private int getMinQuestionRange(){
+        return 1;
+    }
+
+    private int getMaxQuestionRange(){
+        return 30;
+    }
+
+    public String MockQuestion() {
+        return "Sponge Bob";
+    }
+
 }
