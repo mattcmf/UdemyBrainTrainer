@@ -1,8 +1,8 @@
 package demos.udemybraintrainer;
 
-public class TimerActions {
+public class TimerActions implements TimerActionsInterface {
 
-    public static String setTimerFormat(long milliseconds) {
+    public String setTimerFormat(long milliseconds) {
 
         int seconds = (int) (milliseconds / 1000);
         int secondsWithMins = seconds % 60;

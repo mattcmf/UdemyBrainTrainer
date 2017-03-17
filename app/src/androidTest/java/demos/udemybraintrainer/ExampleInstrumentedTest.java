@@ -139,7 +139,7 @@ public class ExampleInstrumentedTest {
         //Mockito.when(ag.getMinAnswerRange()).thenReturn(1);
         //Mockito.when(ag.getMaxAnswerRange()).thenReturn(1);
 
-        Mockito.when(mockQuestionGenerator.MockQuestion()).thenReturn("1 + 1");
+        Mockito.when(mockQuestionGenerator.mockQuestion()).thenReturn("1 + 1");
 
         onView((withId(R.id.btnStartGame))).perform(click());
 

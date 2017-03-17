@@ -11,8 +11,6 @@ import android.widget.Toast;
 
 import java.util.Arrays;
 
-import static demos.udemybraintrainer.TimerActions.setTimerFormat;
-
 public class MainActivity extends AppCompatActivity {
 
     TextView timerDisplay;
@@ -20,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     final int GameLength = 5000;
     AnswerGenerator answerGenerator;
     QuestionGenerator questionGenerator;
+    TimerActions timerActions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         timerDisplay = (TextView) findViewById(R.id.txtTimer);
         questionDisplay = (TextView) findViewById(R.id.txtCurrentQuestion);
+        timerActions = new TimerActions();
     }
 
     public void startGame(View view){
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         questionParts = questionGenerator.getCurrentQuestion();
         answerGenerator.generateAnswersForQuestion(questionParts[0], questionParts[1]);
         //questionDisplay.setText(questionParts[0] + " + " + questionParts[1]);
-        questionDisplay.setText(questionGenerator.MockQuestion());
+        questionDisplay.setText(questionGenerator.mockQuestion());
 
         Log.d("MATT-Question", questionParts[0] + " + " + questionParts[1]);
         Log.d("MATT-Answer Options", Arrays.toString(answerGenerator.getAnswers()));
@@ -56,11 +56,11 @@ public class MainActivity extends AppCompatActivity {
     private void StartTimer(final int timerDuration) {
         CountDownTimer timer = new CountDownTimer(timerDuration,1000){
             public void onTick(long millisecondsUntilDone){
-                timerDisplay.setText(setTimerFormat(millisecondsUntilDone));
+                timerDisplay.setText(timerActions.setTimerFormat(millisecondsUntilDone));
             }
 
             public void onFinish(){
-                timerDisplay.setText(setTimerFormat(0));
+                timerDisplay.setText(timerActions.setTimerFormat(0));
                 Toast.makeText(MainActivity.this, "TIMER END", Toast.LENGTH_SHORT).show();
             }
         }.start();

@@ -2,14 +2,10 @@ package demos.udemybraintrainer;
 
 //@Mock MainActivity
 
-import android.os.Build;
-import android.support.annotation.RequiresApi;
-
 import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
 
-@RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 public class AnswerGeneratorUnitTests {
 
     @Test

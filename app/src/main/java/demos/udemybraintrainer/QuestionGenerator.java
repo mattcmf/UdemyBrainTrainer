@@ -27,7 +27,7 @@ public class QuestionGenerator {
         return 30;
     }
 
-    public String MockQuestion() {
+    public String mockQuestion() {
         return "Sponge Bob";
     }
 
