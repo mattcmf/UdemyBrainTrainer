@@ -2,6 +2,8 @@ package demos.udemybraintrainer;
 
 import org.junit.Test;
 
+import demos.udemybraintrainer.Domain.GameScore;
+
 import static org.junit.Assert.assertEquals;
 
  //@Mock MainActivity

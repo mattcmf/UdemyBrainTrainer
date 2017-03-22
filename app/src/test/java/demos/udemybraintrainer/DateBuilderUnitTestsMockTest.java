@@ -13,13 +13,7 @@ public class DateBuilderUnitTestsMockTest {
 
     @Rule public MockitoRule mockitoRule = MockitoJUnit.rule();
 
-    @Mock
-    TimerActionsInterface timerActionsMock;
-
-//    @Before
-//    public void setuo(){
-//        timerActionsMock = Mockito.mock(TimerActionsInterface.class);
-//    }
+    @Mock TimerActionsInterface timerActionsMock;
 
     @Test
     public void DateBuider_PrependSecondsWithZero() {

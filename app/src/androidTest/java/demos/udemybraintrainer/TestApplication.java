@@ -2,6 +2,9 @@ package demos.udemybraintrainer;
 
 import android.app.Application;
 
+import demos.udemybraintrainer.GraphSupportingFiles.Graph;
+import demos.udemybraintrainer.GraphSupportingFiles.HasGraph;
+
 public class TestApplication extends Application implements HasGraph {
 
     private static Application instance;
@@ -27,7 +30,9 @@ public class TestApplication extends Application implements HasGraph {
     }
 
     public static void setGraph(Graph graph) {
-        TestApplication.graph = graph;
+        if (TestApplication.graph == null){
+            TestApplication.graph = graph;
+        }
     }
 
 }

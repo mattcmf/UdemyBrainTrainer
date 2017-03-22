@@ -1,4 +1,4 @@
-package demos.udemybraintrainer;
+package demos.udemybraintrainer.Activities;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -10,6 +10,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Arrays;
+
+import demos.udemybraintrainer.Domain.AnswerGenerator;
+import demos.udemybraintrainer.Domain.QuestionGenerator;
+import demos.udemybraintrainer.Domain.TimerActions;
+import demos.udemybraintrainer.GraphSupportingFiles.Graph;
+import demos.udemybraintrainer.R;
 
 public class MainActivity extends AppCompatActivity {
 

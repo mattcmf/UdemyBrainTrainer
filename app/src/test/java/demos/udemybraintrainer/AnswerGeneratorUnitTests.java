@@ -4,6 +4,8 @@ package demos.udemybraintrainer;
 
 import org.junit.Test;
 
+import demos.udemybraintrainer.Domain.AnswerGenerator;
+
 import static junit.framework.Assert.assertEquals;
 
 public class AnswerGeneratorUnitTests {

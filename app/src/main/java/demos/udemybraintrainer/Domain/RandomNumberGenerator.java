@@ -1,4 +1,4 @@
-package demos.udemybraintrainer;
+package demos.udemybraintrainer.Domain;
 
 import java.util.Random;
 

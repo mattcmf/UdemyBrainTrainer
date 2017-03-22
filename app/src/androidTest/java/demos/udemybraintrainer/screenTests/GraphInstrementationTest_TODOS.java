@@ -1,10 +1,9 @@
-package demos.udemybraintrainer;
+package demos.udemybraintrainer.screenTests;
 
-import android.content.Context;
-import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.Espresso;
 import android.support.test.espresso.IdlingPolicies;
 import android.support.test.espresso.IdlingResource;
+import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.text.format.DateUtils;
@@ -17,46 +16,58 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 
 import java.util.concurrent.TimeUnit;
+
+import demos.udemybraintrainer.Activities.MainActivity;
+import demos.udemybraintrainer.Domain.QuestionGenerator;
+import demos.udemybraintrainer.ElapsedTimeIdlingResource;
+import demos.udemybraintrainer.GraphSupportingFiles.Graph;
+import demos.udemybraintrainer.R;
+import demos.udemybraintrainer.TestApplication;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static org.hamcrest.core.IsNot.not;
-import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
+
 
 @RunWith(AndroidJUnit4.class)
-public class ExampleInstrumentedTest {
+public class GraphInstrementationTest_TODOS {
 
     @Mock
-    QuestionGenerator mockQuestionGenerator;
+    private QuestionGenerator questionGenerator;
+    @Mock
+    private Graph graph;
 
     @Rule
-    public ActivityTestRule<MainActivity> mActivityRule =
-            new ActivityTestRule<>(MainActivity.class);
-
-    private MainActivity mActivity;
+    public ActivityTestRule<MainActivity> testRule = new ActivityTestRule<>(MainActivity.class, false, false);
+    @Rule
+    public MockitoRule mockitoRule = MockitoJUnit.rule();
 
     @Before
-    public void setUp() {
-        mActivity = mActivityRule.getActivity();
-        mockQuestionGenerator = Mockito.mock(QuestionGenerator.class);
+    public void setup(){
+        initGraphWithQuestionGenerator();
     }
 
     @Test
-    public void useAppContext() throws Exception {
-        // Context of the app under test.
-        Context appContext = InstrumentationRegistry.getTargetContext();
-
-        assertEquals("demos.udemybraintrainer", appContext.getPackageName());
-
+    public void MockTest() {
+        Mockito.when(questionGenerator.getCurrentQuestion()).thenReturn(new int[]{1, 2});
+        testRule.launchActivity(null);
+        onView((ViewMatchers.withId(R.id.btnStartGame))).perform(click());
+        onView((withId(R.id.btnStartGame))).perform(click());
     }
 
-    /*
+    private void initGraphWithQuestionGenerator() {
+        when(graph.questionGenerator()).thenReturn(questionGenerator);
+        TestApplication.setGraph(graph);
+    }
+
+     /*
         ** TIPS **
 
         ** Tip: use tags to find out which button has been pressed
@@ -67,31 +78,32 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void LoadSplashScreen() {
+        initGraphWithQuestionGenerator();
 
-        Spoon.screenshot(mActivity, "On-first-load");
+        Mockito.when(questionGenerator.getCurrentQuestion()).thenReturn(new int[] {1, 2});
 
-        onView(withId(R.id.btnStartGame)).perform(click());
+        testRule.launchActivity(null);
+        Spoon.screenshot(testRule.getActivity(), "On-first-load");
+        onView((withId(R.id.btnStartGame))).perform(click());
 
         //GoButtonIsGreen
-
         //OnClickDisappears
-        Spoon.screenshot(mActivity, "After-click-button-hidden");
+        Spoon.screenshot(testRule.getActivity(), "After-click-button-hidden");
 
-        onView(withId(R.id.btnStartGame)).check((matches(not(isDisplayed()))));
-
+        //onView(withId(R.id.btnStartGame)).check((matches(not(isDisplayed()))));
 
         //OnClickShowMainMenu
     }
 
-    @Test
-    public void Timer(){
+    //@Test
+    public void Timer() {
 
         long waitingTime = DateUtils.SECOND_IN_MILLIS * 5;
 
         IdlingPolicies.setIdlingResourceTimeout(
                 waitingTime, TimeUnit.MILLISECONDS);
 
-        Spoon.screenshot(mActivity, "On-first-load");
+        Spoon.screenshot(testRule.getActivity(), "On-first-load");
 
         onView(withId(R.id.txtTimer)).check((matches(withText("--:--"))));
 
@@ -108,8 +120,7 @@ public class ExampleInstrumentedTest {
     }
 
     @Test
-    public void LoadGameScreen(){
-
+    public void LoadGameScreen() {
 
 
         //Display a 4 grid in the middle of the screen
@@ -123,7 +134,7 @@ public class ExampleInstrumentedTest {
     }
 
     @Test
-    public void QuestionBox(){
+    public void QuestionBox() {
         //Given Go has been clicked
         // Two numbers between 1 and 40 displayed
         // Format is "X + Y"
@@ -131,7 +142,7 @@ public class ExampleInstrumentedTest {
         //Alignment is top center
     }
 
-    @Test
+    //@Test
     public void ScoreDisplay() {
 
         //Box colour?
@@ -141,7 +152,7 @@ public class ExampleInstrumentedTest {
         //Mockito.when(ag.getMinAnswerRange()).thenReturn(1);
         //Mockito.when(ag.getMaxAnswerRange()).thenReturn(1);
 
-        Mockito.when(mockQuestionGenerator.mockQuestion()).thenReturn("1 + 1");
+        //Mockito.when(mockQuestionGenerator.mockQuestion()).thenReturn("1 + 1");
 
         onView((withId(R.id.btnStartGame))).perform(click());
 
@@ -149,7 +160,7 @@ public class ExampleInstrumentedTest {
     }
 
     @Test
-    public void ScoreCorrect(){
+    public void ScoreCorrect() {
         //Given a fresh load Display 0/0
         //When I answer a question correct Then
         //Then Increase both score and question count
@@ -158,7 +169,7 @@ public class ExampleInstrumentedTest {
     }
 
     @Test
-    public void ScoreIncorrect(){
+    public void ScoreIncorrect() {
         //Given a fresh load Display 0/0
         //When I answer a question correct Then
         //Then Increase ONLY question count
@@ -167,7 +178,7 @@ public class ExampleInstrumentedTest {
     }
 
     @Test
-    public void GameMessageCorrect(){
+    public void GameMessageCorrect() {
         //Given I have answered a question right
         //Then display "Correct"
         //And layout is bottom middle
@@ -175,14 +186,14 @@ public class ExampleInstrumentedTest {
 
 
     @Test
-    public void GameMessageTimerEnd(){
+    public void GameMessageTimerEnd() {
         //Given the timer is 0
         //And alignment is bottom middle
         //Then "Your score: 5/16"
     }
 
     @Test
-    public void PlayAgainButton(){
+    public void PlayAgainButton() {
         //Given the timer is at 0
         // When the play again button has been clicked
         //Then reset score

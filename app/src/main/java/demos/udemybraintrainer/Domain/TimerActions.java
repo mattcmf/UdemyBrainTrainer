@@ -1,4 +1,6 @@
-package demos.udemybraintrainer;
+package demos.udemybraintrainer.Domain;
+
+import demos.udemybraintrainer.TimerActionsInterface;
 
 public class TimerActions implements TimerActionsInterface {
 

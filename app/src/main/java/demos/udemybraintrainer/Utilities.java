@@ -3,10 +3,6 @@ package demos.udemybraintrainer;
 import java.util.List;
 import java.util.Random;
 
-/**
- * Created by matthewframpton on 12/03/2017.
- */
-
 public class Utilities {
 
     public static int[] convertIntegers(List<Integer> integers)
@@ -18,7 +14,7 @@ public class Utilities {
         return ret;
     }
 
-    static void shuffleArray(int[] ar) {
+    public static void shuffleArray(int[] ar) {
         Random rnd = new Random();
         for (int i = ar.length - 1; i > 0; i--) {
             int index = rnd.nextInt(i + 1);
