@@ -31,9 +31,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void startGame(View view){
         int offsetForCountDownTimer = 100;
+        //Context context = getApplicationContext();
+        questionGenerator = Graph.from(getApplication().getBaseContext()).questionGenerator();
         answerGenerator = new AnswerGenerator();
-        questionGenerator = new QuestionGenerator();
-
         Button startButton = (Button) findViewById(R.id.btnStartGame);
         //startButton.setVisibility(View.INVISIBLE);
         //StartTimer(GameLength + offsetForCountDownTimer);
