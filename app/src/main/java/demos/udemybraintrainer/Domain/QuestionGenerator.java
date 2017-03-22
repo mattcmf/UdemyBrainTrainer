@@ -1,5 +1,7 @@
 package demos.udemybraintrainer.Domain;
 
+import android.util.Log;
+
 public class QuestionGenerator {
 
     private int[] currentQuestion;
@@ -12,6 +14,7 @@ public class QuestionGenerator {
     }
 
     public int[] getCurrentQuestion() {
+        Log.d("MATT-Question", currentQuestion[0] + " + " + currentQuestion[1]);
         return currentQuestion;
     }
 

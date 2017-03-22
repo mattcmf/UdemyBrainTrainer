@@ -1,6 +1,5 @@
 package demos.udemybraintrainer.screenTests;
 
-import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -26,7 +25,7 @@ import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static org.mockito.AdditionalMatchers.not;
+import static org.hamcrest.core.IsNot.not;
 import static org.mockito.Mockito.when;
 
 
@@ -44,13 +43,7 @@ public class GraphInstrementationTest {
         initGraphWithQuestionGenerator();
         Mockito.when(questionGenerator.getCurrentQuestion()).thenReturn(new int[]{1, 2});
         testRule.launchActivity(null);}
-
-    @Test
-    public void MockTest() {
-        onView((ViewMatchers.withId(R.id.btnStartGame))).perform(click());
-        onView((withId(R.id.btnStartGame))).perform(click());
-    }
-
+    
     @Test
     public void LoadSplashScreen() {
         Spoon.screenshot(testRule.getActivity(), "On-first-load");

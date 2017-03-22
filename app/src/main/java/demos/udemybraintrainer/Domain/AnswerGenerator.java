@@ -1,6 +1,9 @@
 package demos.udemybraintrainer.Domain;
 
+import android.util.Log;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static demos.udemybraintrainer.Utilities.convertIntegers;
@@ -18,6 +21,7 @@ public class AnswerGenerator {
         setMaxAnswerRange(questionFirstPart, questionSecondPart);
         setCorrectAnswer(questionFirstPart + questionSecondPart);
         setAnswersOptions();
+        Log.d("MATT-Answer Options", Arrays.toString(answers));
     }
 
     public int[] padWithInvalidAnswers(int correctAnswer) {
@@ -41,6 +45,7 @@ public class AnswerGenerator {
     }
 
     public int getCorrectAnswer() {
+        Log.d("MATT-Correct Answer", String.valueOf(correctAnswer));
         return correctAnswer;
     }
 
