@@ -76,24 +76,7 @@ public class GraphInstrementationTest_TODOS {
         * ** use tools in xml instead of android for properties that should only display at design time.
     */
 
-    @Test
-    public void LoadSplashScreen() {
-        initGraphWithQuestionGenerator();
 
-        Mockito.when(questionGenerator.getCurrentQuestion()).thenReturn(new int[] {1, 2});
-
-        testRule.launchActivity(null);
-        Spoon.screenshot(testRule.getActivity(), "On-first-load");
-        onView((withId(R.id.btnStartGame))).perform(click());
-
-        //GoButtonIsGreen
-        //OnClickDisappears
-        Spoon.screenshot(testRule.getActivity(), "After-click-button-hidden");
-
-        //onView(withId(R.id.btnStartGame)).check((matches(not(isDisplayed()))));
-
-        //OnClickShowMainMenu
-    }
 
     //@Test
     public void Timer() {
