@@ -29,9 +29,4 @@ public class QuestionGenerator {
     private int getMaxQuestionRange(){
         return 30;
     }
-
-    public String mockQuestion() {
-        return "Sponge Bob";
-    }
-
 }

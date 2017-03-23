@@ -3,11 +3,8 @@ package demos.udemybraintrainer.GraphSupportingFiles;
 import android.app.Application;
 import android.content.Context;
 
+import demos.udemybraintrainer.Domain.GameTimer;
 import demos.udemybraintrainer.Domain.QuestionGenerator;
-
-/**
- * Created by matthewframpton on 17/03/2017.
- */
 
 public class Graph {
 
@@ -27,6 +24,11 @@ public class Graph {
 
     public QuestionGenerator questionGenerator(){
         QuestionGenerator questionGenerator = new QuestionGenerator();
-        return questionGenerator ;
+        return questionGenerator;
+    }
+
+    public GameTimer gameTimer(){
+        GameTimer gameTimer = new GameTimer();
+        return gameTimer;
     }
 }

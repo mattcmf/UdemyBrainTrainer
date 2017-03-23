@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import demos.udemybraintrainer.Domain.AnswerGenerator;
+import demos.udemybraintrainer.Domain.GameTimer;
 import demos.udemybraintrainer.Domain.QuestionGenerator;
 import demos.udemybraintrainer.Domain.TimerActions;
 import demos.udemybraintrainer.GraphSupportingFiles.Graph;
@@ -18,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
     TextView timerDisplay;
     TextView questionDisplay;
-    final int GameLength = 5000;
+    GameTimer gameTimer;
     AnswerGenerator answerGenerator;
     QuestionGenerator questionGenerator;
     TimerActions timerActions;
@@ -35,10 +36,11 @@ public class MainActivity extends AppCompatActivity {
     public void startGame(View view){
         int offsetForCountDownTimer = 100;
         questionGenerator = Graph.from(getApplication().getBaseContext()).questionGenerator();
+        gameTimer = Graph.from(getApplication().getBaseContext()).gameTimer();
         answerGenerator = new AnswerGenerator();
         Button startButton = (Button) findViewById(R.id.btnStartGame);
         startButton.setVisibility(View.INVISIBLE);
-        StartTimer(GameLength + offsetForCountDownTimer);
+        StartTimer(gameTimer.getGameLength() + offsetForCountDownTimer);
         NewQuestion();
     }
 
@@ -48,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
         questionParts = questionGenerator.getCurrentQuestion();
         answerGenerator.generateAnswersForQuestion(questionParts[0], questionParts[1]);
         questionDisplay.setText(questionParts[0] + " + " + questionParts[1]);
-        questionDisplay.setText(questionGenerator.mockQuestion());
         answerGenerator.getCorrectAnswer();
     }
 
