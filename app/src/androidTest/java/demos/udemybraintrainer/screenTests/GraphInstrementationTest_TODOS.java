@@ -1,39 +1,25 @@
 package demos.udemybraintrainer.screenTests;
 
-import android.support.test.espresso.Espresso;
-import android.support.test.espresso.IdlingPolicies;
-import android.support.test.espresso.IdlingResource;
-import android.support.test.espresso.matcher.ViewMatchers;
-import android.support.test.rule.ActivityTestRule;
-import android.support.test.runner.AndroidJUnit4;
-import android.text.format.DateUtils;
-
-import com.squareup.spoon.Spoon;
-
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnit;
-import org.mockito.junit.MockitoRule;
-
-import java.util.concurrent.TimeUnit;
-
-import demos.udemybraintrainer.Activities.MainActivity;
-import demos.udemybraintrainer.Domain.QuestionGenerator;
-import demos.udemybraintrainer.ElapsedTimeIdlingResource;
-import demos.udemybraintrainer.GraphSupportingFiles.Graph;
-import demos.udemybraintrainer.R;
-import demos.udemybraintrainer.TestApplication;
-
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static org.mockito.Mockito.when;
+
+import android.support.test.rule.ActivityTestRule;
+import android.support.test.runner.AndroidJUnit4;
+
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
+
+import demos.udemybraintrainer.Activities.MainActivity;
+import demos.udemybraintrainer.Domain.QuestionGenerator;
+import demos.udemybraintrainer.GraphSupportingFiles.Graph;
+import demos.udemybraintrainer.R;
 
 
 @RunWith(AndroidJUnit4.class)
@@ -49,24 +35,6 @@ public class GraphInstrementationTest_TODOS {
     @Rule
     public MockitoRule mockitoRule = MockitoJUnit.rule();
 
-    @Before
-    public void setup(){
-        initGraphWithQuestionGenerator();
-    }
-
-    @Test
-    public void MockTest() {
-        Mockito.when(questionGenerator.getCurrentQuestion()).thenReturn(new int[]{1, 2});
-        testRule.launchActivity(null);
-        onView((ViewMatchers.withId(R.id.btnStartGame))).perform(click());
-        onView((withId(R.id.btnStartGame))).perform(click());
-    }
-
-    private void initGraphWithQuestionGenerator() {
-        when(graph.questionGenerator()).thenReturn(questionGenerator);
-        TestApplication.setGraph(graph);
-    }
-
      /*
         ** TIPS **
 
@@ -75,32 +43,6 @@ public class GraphInstrementationTest_TODOS {
         *
         * ** use tools in xml instead of android for properties that should only display at design time.
     */
-
-
-
-    //@Test
-    public void Timer() {
-
-        long waitingTime = DateUtils.SECOND_IN_MILLIS * 5;
-
-        IdlingPolicies.setIdlingResourceTimeout(
-                waitingTime, TimeUnit.MILLISECONDS);
-
-        Spoon.screenshot(testRule.getActivity(), "On-first-load");
-
-        onView(withId(R.id.txtTimer)).check((matches(withText("--:--"))));
-
-        onView((withId(R.id.btnStartGame))).perform(click());
-
-        // Now we wait
-        IdlingResource idlingResource = new ElapsedTimeIdlingResource(waitingTime);
-        Espresso.registerIdlingResources(idlingResource);
-
-        onView(withId(R.id.txtTimer)).check((matches(withText("00:00s"))));
-
-        // Clean up
-        Espresso.unregisterIdlingResources(idlingResource);
-    }
 
     @Test
     public void LoadGameScreen() {

@@ -56,7 +56,6 @@ public class GraphInstrementationTest {
     public void setup(){
         initGraphWithQuestionGenerator();
 
-
         //Idling resources
         IdlingPolicies.setIdlingResourceTimeout(waitingTime, TimeUnit.MILLISECONDS);
         idlingResource = new ElapsedTimeIdlingResource(waitingTime);
@@ -64,9 +63,7 @@ public class GraphInstrementationTest {
 
     @Test
     public void whenStartGameClicked_ThenHide() {
-        Mockito.when(questionGenerator.getCurrentQuestion()).thenReturn(new int[]{1, 2});
         testRule.launchActivity(null);
-
         Spoon.screenshot(testRule.getActivity(), "On-first-load");
         onView((withId(R.id.btnStartGame))).perform(click());
         Spoon.screenshot(testRule.getActivity(), "After-click-button-hidden");
@@ -85,6 +82,14 @@ public class GraphInstrementationTest {
         Espresso.registerIdlingResources(idlingResource);
         onView(withId(R.id.txtTimer)).check((matches(withText("00:00s"))));
     }
+
+	@Test
+	public void ScoreDisplay() {
+		onView(withId(R.id.txtScore)).check((matches(withText("0/0"))));
+		Mockito.when(questionGenerator.getCurrentQuestion()).thenReturn(new int[]{1, 1});
+		onView((withId(R.id.btnStartGame))).perform(click());
+		onView(withId(R.id.txtScore)).check((matches(withText("1 + 1"))));
+	}
 
     private void initGraphWithQuestionGenerator() {
         when(graph.questionGenerator()).thenReturn(questionGenerator);
