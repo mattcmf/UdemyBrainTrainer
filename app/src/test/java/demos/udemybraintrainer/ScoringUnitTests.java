@@ -1,19 +1,17 @@
 package demos.udemybraintrainer;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 
 import demos.udemybraintrainer.Domain.GameScore;
-
-import static org.junit.Assert.assertEquals;
-
- //@Mock MainActivity
 
 public class ScoringUnitTests {
 
     @Test
     public void whenIIncrementScore_ThenScoreIsUpdated()
     {
-        GameScore.setScore(10);
+        GameScore.overrideScore(10);
         GameScore.reset();
         assertEquals(0, GameScore.getScore());
     }
@@ -21,8 +19,8 @@ public class ScoringUnitTests {
     @Test
     public void whenIResetScore_ThenScoreIs0()
     {
-        GameScore.setScore(0);
-        GameScore.incrementScore();
+        GameScore.overrideScore(0);
+        //GameScore.updateScore();
         assertEquals(1, GameScore.getScore());
     }
 }
