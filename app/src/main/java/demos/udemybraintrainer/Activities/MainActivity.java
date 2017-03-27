@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import demos.udemybraintrainer.Domain.AnswerGenerator;
 import demos.udemybraintrainer.Domain.GameTimer;
@@ -23,6 +22,10 @@ public class MainActivity extends AppCompatActivity {
     AnswerGenerator answerGenerator;
     QuestionGenerator questionGenerator;
     TimerActions timerActions;
+	Button topLeftTile;
+	Button topRightTile;
+	Button bottomLeft;
+	Button bottomRight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,10 @@ public class MainActivity extends AppCompatActivity {
         timerDisplay = (TextView) findViewById(R.id.txtTimer);
         questionDisplay = (TextView) findViewById(R.id.txtCurrentQuestion);
         timerActions = new TimerActions();
+	    topLeftTile = (Button) findViewById(R.id.topLeftTile);
+	    topRightTile = (Button) findViewById(R.id.topRightTile);
+	    bottomLeft = (Button) findViewById(R.id.bottomLeftTile);
+	    bottomRight = (Button) findViewById(R.id.bottomRightTile);
     }
 
     public void startGame(View view){
@@ -51,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         answerGenerator.generateAnswersForQuestion(questionParts[0], questionParts[1]);
         questionDisplay.setText(questionParts[0] + " + " + questionParts[1]);
         answerGenerator.getCorrectAnswer();
+	    returnSquareContent(answerGenerator.getAnswers());
     }
 
     private void StartTimer(final int timerDuration) {
@@ -61,8 +69,25 @@ public class MainActivity extends AppCompatActivity {
 
             public void onFinish(){
                 timerDisplay.setText(timerActions.setTimerFormat(0));
-                Toast.makeText(MainActivity.this, "TIMER END", Toast.LENGTH_SHORT).show();
+	            topLeftTile.setVisibility(View.INVISIBLE);
+	            topRightTile.setVisibility(View.INVISIBLE);
+	            bottomLeft.setVisibility(View.INVISIBLE);
+	            bottomRight.setVisibility(View.INVISIBLE);
             }
         }.start();
     }
+
+	private int returnSquareContent(int[] answers){
+		topLeftTile.setVisibility(View.VISIBLE);
+		topRightTile.setVisibility(View.VISIBLE);
+		bottomLeft.setVisibility(View.VISIBLE);
+		bottomRight.setVisibility(View.VISIBLE);
+
+		topLeftTile.setText(String.valueOf(answers[0]));
+		topRightTile.setText(String.valueOf(answers[1]));
+		bottomLeft.setText(String.valueOf(answers[2]));
+		bottomRight.setText(String.valueOf(answers[3]));
+
+		return 0;
+	}
 }

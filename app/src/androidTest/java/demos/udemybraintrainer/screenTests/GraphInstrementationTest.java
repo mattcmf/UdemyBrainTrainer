@@ -85,10 +85,17 @@ public class GraphInstrementationTest {
 
 	@Test
 	public void ScoreDisplay() {
+		Mockito.when(gameTimer.getGameLength()).thenReturn(5000);
 		onView(withId(R.id.txtScore)).check((matches(withText("0/0"))));
+
 		Mockito.when(questionGenerator.getCurrentQuestion()).thenReturn(new int[]{1, 1});
+		//Mockito.when(answerGenerator.getAnswers().thenReturn(new String[]{"wrong","wrong","wrong", "2")));
+
+		//click view with text 1
 		onView((withId(R.id.btnStartGame))).perform(click());
 		onView(withId(R.id.txtScore)).check((matches(withText("1 + 1"))));
+		onView((withText("1"))).perform();
+		onView(withId(R.id.txtScore)).check((matches(withText("1/0"))));
 	}
 
     private void initGraphWithQuestionGenerator() {
