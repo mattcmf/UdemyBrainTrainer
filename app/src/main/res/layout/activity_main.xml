@@ -11,169 +11,169 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="demos.udemybraintrainer.Activities.MainActivity">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <TextView
+        android:text="--:--"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtTimer"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.11"
+        android:background="#ffff00"
+        android:textAlignment="center"
+        android:textSize="@dimen/bannerTextSize"
+        android:textColor="@android:color/background_dark" />
+
+    <GridLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:weightSum="1"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.15"
-            android:id="@+id/TopBanner">
-
-            <TextView
-                android:text="--:--"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/txtTimer"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="0.11"
-                android:background="#ffff00"
-                android:textAlignment="center"
-                android:textSize="24sp" />
-
-            <TextView
-                android:text="No current question"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/txtCurrentQuestion"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="0.11"
-                android:textAlignment="center"
-                android:textSize="24sp" />
-
-            <TextView
-                android:text="0/0"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/txtScore"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="0.11"
-                android:textAlignment="center"
-                android:textSize="24sp" />
-        </LinearLayout>
+        android:layout_height="200dp"
+        android:columnCount="2"
+        android:rowCount="2"
+        android:stretchMode="columnWidth"
+        android:layout_gravity="center"
+        android:layout_weight="0.59"
+        android:layout_above="@+id/playAgain"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="64dp">
 
         <Button
-            android:text="@string/start_game"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:id="@+id/btnStartGame"
+            android:id="@+id/bottomRightTile"
+            android:text="@string/tbc"
             android:background="@android:color/holo_green_light"
-            android:onClick="startGame"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"
-            android:textSize="24sp" />
-
-        <GridLayout
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:columnCount="2"
-            android:rowCount="2"
-            android:stretchMode="columnWidth"
-            android:layout_gravity="center"
-            android:layout_weight="0.59"
-            android:layout_marginBottom="50dp">
-
-            <Button
-                android:id="@+id/bottomRightTile"
-                android:text="@string/tbc"
-                android:background="@android:color/holo_green_light"
-                android:tag="3"
-                android:layout_row="1"
-                android:layout_column="1"
-                android:layout_gravity="fill"
-                android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
-                tools:visibility="visible"
-                android:visibility="invisible"
-                android:textAlignment="gravity"
-                android:textSize="@dimen/buttonText"
-                android:onClick="checkAnswer" />
-
-            <Button
-                android:id="@+id/topLeftTile"
-                android:text="@string/tbc"
-                android:tag="2"
-                android:background="@android:color/holo_blue_bright"
-                android:gravity="center_horizontal|center"
-                android:layout_row="0"
-                android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
-                android:layout_column="0"
-                android:layout_gravity="fill"
-                tools:visibility="visible"
-                android:visibility="invisible"
-                android:textAlignment="gravity"
-                android:textSize="@dimen/buttonText"
-                android:onClick="checkAnswer" />
-
-            <Button
-                android:id="@+id/bottomLeftTile"
-                android:text="@string/tbc"
-                android:background="@android:color/holo_orange_light"
-                android:tag="4"
-                android:layout_row="1"
-                android:layout_column="0"
-                android:gravity="center"
-                android:layout_gravity="fill"
-                android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
-                tools:visibility="visible"
-                android:visibility="invisible"
-                android:textAlignment="gravity"
-                android:textSize="@dimen/buttonText"
-                android:onClick="checkAnswer" />
-
-            <Button
-                android:id="@+id/topRightTile"
-                android:text="@string/tbc"
-                android:background="@color/colorAccent"
-                android:tag="1"
-                android:layout_row="0"
-                android:layout_column="1"
-                tools:visibility="visible"
-                android:layout_gravity="fill"
-                android:visibility="invisible"
-                android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
-                android:textAlignment="center"
-                android:gravity="center_horizontal|center"
-                android:textSize="@dimen/buttonText"
-                android:onClick="checkAnswer" />
-
-
-        </GridLayout>
-
-        <TextView
-            android:text="I should be invisible on start"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/gameMessage"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="0.11"
-            android:textAlignment="center"
+            android:tag="3"
+            android:layout_row="1"
+            android:layout_column="1"
+            android:layout_gravity="fill"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
             tools:visibility="visible"
             android:visibility="invisible"
-            android:textSize="30sp" />
+            android:textAlignment="gravity"
+            android:textSize="@dimen/buttonText"
+            android:onClick="checkAnswer" />
 
         <Button
-            android:text="Play again?"
-            android:layout_width="170dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:id="@+id/playAgain"
+            android:id="@+id/topLeftTile"
+            android:text="@string/tbc"
+            android:tag="2"
             android:background="@android:color/holo_blue_bright"
-            android:onClick="restart"
-            android:layout_marginTop="25dp"
-            android:layout_marginBottom="25dp"
+            android:gravity="center_horizontal|center"
+            android:layout_row="0"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_column="0"
+            android:layout_gravity="fill"
             tools:visibility="visible"
             android:visibility="invisible"
-            android:textSize="24sp"/>
-    </LinearLayout>
+            android:textAlignment="gravity"
+            android:textSize="@dimen/buttonText"
+            android:onClick="checkAnswer" />
+
+        <Button
+            android:id="@+id/bottomLeftTile"
+            android:text="@string/tbc"
+            android:background="@android:color/holo_orange_light"
+            android:tag="4"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:gravity="center"
+            android:layout_gravity="fill"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            tools:visibility="visible"
+            android:visibility="invisible"
+            android:textAlignment="gravity"
+            android:textSize="@dimen/buttonText"
+            android:onClick="checkAnswer" />
+
+        <Button
+            android:id="@+id/topRightTile"
+            android:text="@string/tbc"
+            android:background="@color/colorAccent"
+            android:tag="1"
+            android:layout_row="0"
+            android:layout_column="1"
+            tools:visibility="visible"
+            android:layout_gravity="fill"
+            android:visibility="invisible"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:textAlignment="center"
+            android:gravity="center_horizontal|center"
+            android:textSize="@dimen/buttonText"
+            android:onClick="checkAnswer" />
+
+
+    </GridLayout>
+
+    <TextView
+        android:text="0/0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtScore"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.11"
+        android:textAlignment="center"
+        android:textSize="@dimen/bannerTextSize"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:textColor="@android:color/background_dark" />
+
+    <Button
+        android:text="Play again?"
+        android:layout_width="170dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:id="@+id/playAgain"
+        android:background="@android:color/holo_blue_bright"
+        android:onClick="restart"
+        tools:visibility="visible"
+        android:visibility="invisible"
+        android:textSize="24sp"
+        android:layout_marginBottom="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="@android:color/background_dark" />
+
+    <Button
+        android:text="@string/start_game"
+        android:layout_width="170dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:id="@+id/btnStartGame"
+        android:background="@android:color/holo_green_light"
+        android:onClick="startGame"
+        android:textSize="24sp"
+        android:layout_marginTop="94dp"
+        android:layout_below="@+id/txtCurrentQuestion"
+        android:layout_alignStart="@+id/playAgain" />
+
+    <TextView
+        android:text="I should be invisible on start"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/gameMessage"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.11"
+        android:textAlignment="center"
+        tools:visibility="visible"
+        android:visibility="invisible"
+        android:textSize="30sp"
+        android:layout_above="@+id/playAgain"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="9dp"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:text="No current question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtCurrentQuestion"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.11"
+        android:textAlignment="center"
+        android:textSize="@dimen/bannerTextSize"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="@android:color/background_dark" />
+
 </RelativeLayout>

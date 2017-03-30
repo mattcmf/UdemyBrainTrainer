@@ -5,4 +5,5 @@
     <dimen name="squareWidth">170dp</dimen>
     <dimen name="squareHeight">170dp</dimen>
     <dimen name="buttonText">36sp</dimen>
+    <dimen name="bannerTextSize">23sp</dimen>
 </resources>
