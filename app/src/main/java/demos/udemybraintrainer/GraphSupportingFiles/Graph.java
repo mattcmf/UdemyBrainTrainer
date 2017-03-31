@@ -22,7 +22,7 @@ public class Graph {
         return ((HasGraph) context.getApplicationContext()).graph();
     }
 
-    public QuestionGenerator questionGenerator(){
+	public QuestionGenerator questionGenerator(){
         QuestionGenerator questionGenerator = new QuestionGenerator();
         return questionGenerator;
     }

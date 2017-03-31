@@ -1,6 +1,9 @@
 package demos.udemybraintrainer.Domain;
 
-public class GameScore {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class GameScore implements Parcelable {
 
     private static int score;
 	private static int checkedAnswers;
@@ -34,4 +37,14 @@ public class GameScore {
 	public static void overrideScore(int score) {
         GameScore.score = score;
     }
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+
+	}
 }

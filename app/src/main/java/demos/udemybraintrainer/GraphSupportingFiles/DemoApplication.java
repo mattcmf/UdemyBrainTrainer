@@ -5,6 +5,7 @@ import android.app.Application;
 public class DemoApplication extends Application implements HasGraph {
 
     private Graph graph;
+	public boolean started = false;
 
     public DemoApplication() {
         this.graph = new Graph(this);
@@ -13,11 +14,11 @@ public class DemoApplication extends Application implements HasGraph {
     @Override
     public void onCreate() {
         super.onCreate();
+	    started = true;
     }
 
     @Override
     public Graph graph() {
         return graph;
     }
-
 }

@@ -1,5 +1,7 @@
 package demos.udemybraintrainer.Domain;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -9,7 +11,7 @@ import java.util.List;
 import static demos.udemybraintrainer.Utilities.convertIntegers;
 import static demos.udemybraintrainer.Utilities.shuffleArray;
 
-public class AnswerGenerator {
+public class AnswerGenerator implements Parcelable {
 
     private int[] answers;
     private int correctAnswer;
@@ -77,4 +79,14 @@ public class AnswerGenerator {
     public int[] getAnswers() {
         return answers;
     }
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+
+	}
 }
