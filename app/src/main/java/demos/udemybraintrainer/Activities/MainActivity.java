@@ -37,6 +37,11 @@ public class MainActivity extends AppCompatActivity {
 	Button bottomLeft;
 	Button bottomRight;
 	Button startButton;
+
+	long gameTimeRemaining;
+
+	CountDownTimer timer;
+
 	boolean gridStarted =false;
 
 
@@ -59,10 +64,11 @@ public class MainActivity extends AppCompatActivity {
 			};
 			answerGenerator =(savedInstanceState.getParcelable("answers"));
 			questionGenerator=(savedInstanceState.getParcelable("question_generator"));
-
 			questionDisplay.setText(formattedQuestion());
 			gameScore = savedInstanceState.getParcelable("gameScore");
 			gameScoreDisplay.setText(gameScore.getScore());
+			gameTimeRemaining = savedInstanceState.getLong("gameTimeRemaining");
+			StartTimer(gameTimeRemaining);
 
 			try {
 				returnSquareContent(answerGenerator .getAnswers());
@@ -88,12 +94,9 @@ public class MainActivity extends AppCompatActivity {
 	public void onSaveInstanceState(Bundle outState) {
 		outState.putString("message", "This is my message to be reloaded");
 		outState.putParcelable("question_generator", questionGenerator);
-
-		//TODO: Remove this
-		outState.putString("grid_visibility", GameScore.getScore());
+		outState.putLong("gameTimeRemaining", gameTimeRemaining);
 		outState.putParcelable("current_score", gameScore);
 		outState.putParcelable("answers", answerGenerator);
-
 		super.onSaveInstanceState(outState);
 	}
 
@@ -187,10 +190,11 @@ public class MainActivity extends AppCompatActivity {
 		NewQuestion();
 	}
 
-    private void StartTimer(final int timerDuration) {
-        CountDownTimer timer = new CountDownTimer(timerDuration,1000){
+    private void StartTimer(final long timerDuration) {
+	    timer = new CountDownTimer(timerDuration,1000){
             public void onTick(long millisecondsUntilDone){
-                timerDisplay.setText(timerActions.setTimerFormat(millisecondsUntilDone));
+	            gameTimeRemaining = millisecondsUntilDone;
+	            timerDisplay.setText(timerActions.setTimerFormat(millisecondsUntilDone));
             }
 
             public void onFinish(){
