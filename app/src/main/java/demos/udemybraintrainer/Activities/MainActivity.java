@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
 	Button bottomRight;
 	Button startButton;
 	boolean gridStarted =false;
-	int[] questionParts;
 
 
 	final int offsetForCountDownTimer = 100;
@@ -53,26 +52,44 @@ public class MainActivity extends AppCompatActivity {
 			String message = savedInstanceState.getString("message");
 			Toast.makeText(this, message, Toast.LENGTH_LONG).show();
 			startUp();
-			questionDisplay.setText(savedInstanceState.getString("current_question"));
-			gameScoreDisplay.setText(savedInstanceState.getString("current_score"));
-			gameScore = savedInstanceState.getParcelable("gameScore");
+			//gameScore = savedInstanceState.getParcelable("gameScore");
 			if (gridStarted){
 				makeGridVisible();
 				hidePlayButton();
 			};
-			gameScoreDisplay.setVisibility(View.VISIBLE);
 			answerGenerator =(savedInstanceState.getParcelable("answers"));
-			returnSquareContent(answerGenerator .getAnswers());
+			questionGenerator=(savedInstanceState.getParcelable("question_generator"));
 
+			questionDisplay.setText(formattedQuestion());
+			gameScore = savedInstanceState.getParcelable("gameScore");
+			gameScoreDisplay.setText(gameScore.getScore());
+
+			try {
+				returnSquareContent(answerGenerator .getAnswers());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
+		showGameStatsPanel();
+	}
+
+	public void showGameStatsPanel(){
+		gameScoreDisplay.setVisibility(View.VISIBLE);
+		questionDisplay.setVisibility(View.VISIBLE);
+	}
+
+	private String formattedQuestion(){
+		int[] questionParts = questionGenerator.getCurrentQuestion();
+		return questionParts[0] + " + " + questionParts[1];
 	}
 
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		outState.putString("message", "This is my message to be reloaded");
-		outState.putString("current_question", questionParts[0] + " + " + questionParts[1]);
-		outState.putString("current_score", GameScore.getScore());
+		outState.putParcelable("question_generator", questionGenerator);
+
+		//TODO: Remove this
 		outState.putString("grid_visibility", GameScore.getScore());
 		outState.putParcelable("current_score", gameScore);
 		outState.putParcelable("answers", answerGenerator);
@@ -149,11 +166,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void NewQuestion(){
         questionGenerator.generateQuestion();
-        questionParts = questionGenerator.getCurrentQuestion();
-        answerGenerator.generateAnswersForQuestion(questionParts[0], questionParts[1]);
-        questionDisplay.setText(questionParts[0] + " + " + questionParts[1]);
+	    answerGenerator.generateAnswersForQuestion(
+			    questionGenerator.getCurrentQuestion());
+
+	    questionDisplay.setText(formattedQuestion());
         answerGenerator.getCorrectAnswer();
-	    returnSquareContent(answerGenerator.getAnswers());
+	    try {
+		    returnSquareContent(answerGenerator.getAnswers());
+	    } catch (Exception e) {
+		    e.printStackTrace();
+	    }
     }
 
 	public void restart(View view){

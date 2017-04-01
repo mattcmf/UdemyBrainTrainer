@@ -2,11 +2,11 @@ package demos.udemybraintrainer;
 
 //@Mock MainActivity
 
+import static junit.framework.Assert.assertEquals;
+
 import org.junit.Test;
 
 import demos.udemybraintrainer.Domain.AnswerGenerator;
-
-import static junit.framework.Assert.assertEquals;
 
 public class AnswerGeneratorUnitTests {
 
@@ -22,7 +22,7 @@ public class AnswerGeneratorUnitTests {
     }
 
     @Test
-    public void whenIGenerateAQuestion_Then4AnswersAreGenerated() {
+    public void whenIGenerateAQuestion_Then4AnswersAreGenerated() throws Exception {
         int[] answers;
         AnswerGenerator answerGenerator = new AnswerGenerator();
 
@@ -33,7 +33,7 @@ public class AnswerGeneratorUnitTests {
     }
 
     @Test
-    public void whenIGenerateAQuestion_Then4UniqueAnswersAreGenerated() {
+    public void whenIGenerateAQuestion_Then4UniqueAnswersAreGenerated() throws Exception {
         int[] answers;
         AnswerGenerator answerGenerator = new AnswerGenerator();
 

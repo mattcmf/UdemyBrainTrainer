@@ -18,10 +18,10 @@ public class AnswerGenerator implements Parcelable {
     private int maxAnswerRange;
     private int minAnswerRange;
 
-    public void generateAnswersForQuestion(int questionFirstPart, int questionSecondPart) {
-        setMinAnswerRange(questionFirstPart, questionSecondPart);
-        setMaxAnswerRange(questionFirstPart, questionSecondPart);
-        setCorrectAnswer(questionFirstPart + questionSecondPart);
+    public void generateAnswersForQuestion(int[] question) {
+        setMinAnswerRange(question[0], question[1]);
+        setMaxAnswerRange(question[0], question[1]);
+        setCorrectAnswer(question[0]+ question[1]);
         setAnswersOptions();
         Log.d("MATT-Answer Options", Arrays.toString(answers));
     }
@@ -76,7 +76,11 @@ public class AnswerGenerator implements Parcelable {
         return minAnswerRange;
     }
 
-    public int[] getAnswers() {
+    public int[] getAnswers() throws Exception {
+	    if (answers == null)
+	    {
+		    throw new Exception("No answers have been generated!");
+	    }
         return answers;
     }
 

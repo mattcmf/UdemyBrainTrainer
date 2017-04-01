@@ -1,8 +1,10 @@
 package demos.udemybraintrainer.Domain;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
-public class QuestionGenerator {
+public class QuestionGenerator implements Parcelable {
 
     private int[] currentQuestion;
 
@@ -29,4 +31,14 @@ public class QuestionGenerator {
     private int getMaxQuestionRange(){
         return 30;
     }
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+
+	}
 }
