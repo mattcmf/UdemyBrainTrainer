@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import demos.udemybraintrainer.Domain.AnswerGenerator;
 import demos.udemybraintrainer.Domain.GameScore;
@@ -55,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
 
 		if (savedInstanceState != null) {
 			String message = savedInstanceState.getString("message");
-			Toast.makeText(this, message, Toast.LENGTH_LONG).show();
 			startUp();
 			//gameScore = savedInstanceState.getParcelable("gameScore");
 			if (gridStarted){
